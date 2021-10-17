@@ -6,8 +6,9 @@ import bulma from '../node_modules/bulma/css/bulma.css'
 Vue.config.productionTip = false
 
 new Vue({
+  bulma,
   vuetify,
   router,
-  bulma,
+
   render: h => h(App)
 }).$mount('#app')
