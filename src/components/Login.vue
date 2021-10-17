@@ -59,7 +59,7 @@ import axios from "axios";
       validate () {
        let valid =  this.$refs.form.validate()
        if(valid != false){
-           axios.post('http://localhost:8686/login',{ password: this.password,email: 1,}).then(res => {
+           axios.post('http://localhost:8686/login',{ password: this.password,email: this.email,}).then(res => {
           localStorage.setItem("token",res.data.token)
            this.$router.push({name:'Home'})
         }).catch(error =>{
