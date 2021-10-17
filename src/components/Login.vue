@@ -1,103 +1,113 @@
 <template>
+<div class="container-login">
   <v-form
     ref="form"
     v-model="valid"
     lazy-validation
   >
     <v-text-field
-      v-model="name"
-      :counter="10"
-      :rules="nameRules"
-      label="Name"
-      required
-    ></v-text-field>
-
-    <v-text-field
       v-model="email"
       :rules="emailRules"
       label="E-mail"
       required
     ></v-text-field>
-
-    <v-select
-      v-model="select"
-      :items="items"
-      :rules="[v => !!v || 'Item is required']"
-      label="Item"
-      required
-    ></v-select>
-
-    <v-checkbox
-      v-model="checkbox"
-      :rules="[v => !!v || 'You must agree to continue!']"
-      label="Do you agree?"
-      required
-    ></v-checkbox>
-
+     <v-text-field
+            v-model="password"
+            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+            :rules="[rules.required, rules.min]"
+            :type="show1 ? 'text' : 'password'"
+            name="input-10-1"
+            label="Password"
+            hint="At least 8 characters"
+            counter
+            @click:append="show1 = !show1"
+          ></v-text-field>
+  <div class="group-buttom">
     <v-btn
       :disabled="!valid"
       color="success"
-      class="mr-4"
+      class="mr-4 btn-form-sigin"
       @click="validate"
     >
-      Validate
+      Login
     </v-btn>
-
-    <v-btn
-      color="error"
-      class="mr-4"
-      @click="reset"
-    >
-      Reset Form
-    </v-btn>
-
-    <v-btn
-      color="warning"
-      @click="resetValidation"
-    >
-      Reset Validation
-    </v-btn>
+    </div>
   </v-form>
+</div>
 </template>
 
 <script>
   export default {
     data: () => ({
       valid: true,
-      name: '',
-      nameRules: [
-        v => !!v || 'Name is required',
-        v => (v && v.length <= 10) || 'Name must be less than 10 characters',
-      ],
       email: '',
       emailRules: [
         v => !!v || 'E-mail is required',
         v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
       ],
-      select: null,
-      items: [
-        'Item 1',
-        'Item 2',
-        'Item 3',
-        'Item 4',
-      ],
-      checkbox: false,
+        show1: false,
+        password: '',
+        rules: {
+          required: value => !!value || 'Required.',
+          min: v => v.length >= 8 || 'Min 8 characters',
+          emailMatch: () => (`The email and password you entered don't match`),
+        },
     }),
 
     methods: {
       validate () {
         this.$refs.form.validate()
       },
-      reset () {
-        this.$refs.form.reset()
-      },
-      resetValidation () {
-        this.$refs.form.resetValidation()
-      },
     },
   }
 </script>
 
 <style>
+  .container-login {
+    background-color: #FFF;
+    width: 380px !important;
+    height: 580px !important;
+
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+
+    border: solid 1px white;
+    border-radius: 4px;
+  }
+
+  .group-buttom {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem; 
+  }
+
+  .btn-form-sigin {
+    margin: 10px;
+    background-image: linear-gradient(to left, #5ecddc, #668ae4, #9c54e9, #d63af5) !important;
+    border-radius: 25px !important;
+
+    font-family: Roboto;
+    font-weight: bold;
+  }
+
+    .btn-form {
+    margin: 10px;
+    background-color: white !important;
+    border-radius: 25px !important;
+
+    font-family: Roboto;
+    font-weight: bold;
+    color: #000 !important;
+  }
+
+  .btn-form:hover{
+    transform: translateY(-3px);
+
+    background-image: linear-gradient(to left, #5ecddc, #668ae4, #9c54e9, #d63af5) !important;
+    color: white !important;
+  }
 
 </style>
