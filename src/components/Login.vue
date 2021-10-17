@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import axios from "axios";
   export default {
     data: () => ({
       valid: true,
@@ -56,8 +57,18 @@
 
     methods: {
       validate () {
-        this.$refs.form.validate()
+       let valid =  this.$refs.form.validate()
+       if(valid != false){
+           axios.post('http://localhost:8686/login',{ password: this.password,email: 1,}).then(res => {
+          localStorage.setItem("token",res.data.token)
+           this.$router.push({name:'Home'})
+        }).catch(error =>{
+          console.log(error.response)
+        })
+       }
+      
       },
+
     },
   }
 </script>

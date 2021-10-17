@@ -2,8 +2,6 @@
    <div class="container">
     <Login/>
    </div>
-    
-
 </template>
 
 <script>
