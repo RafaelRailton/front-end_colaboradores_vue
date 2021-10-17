@@ -1,9 +1,9 @@
 <template>
  <div>
-          <Login/>
- </div>
   
- 
+    <Login/>
+
+ </div>
 </template>
 
 <script>

@@ -1,4 +1,5 @@
 <template>
+<div id="main">
   <v-form
     ref="form"
     v-model="valid"
@@ -58,6 +59,7 @@
       Reset Validation
     </v-btn>
   </v-form>
+  </div>
 </template>
 
 <script>
